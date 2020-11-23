@@ -10,8 +10,8 @@ namespace HostelDB.Database
 {
     public class HostelDbContext : DbContext
     {
-        public HostelDbContext(DbContextOptions<HostelDbContext> options) : 
-            base(options) { }
+        //public HostelDbContext(DbContextOptions<HostelDbContext> options) : 
+        //    base(options) { }
 
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Resident> Residents { get; set; }
@@ -22,6 +22,11 @@ namespace HostelDB.Database
             modelBuilder.ApplyConfiguration(new RoomConfiguration());
             modelBuilder.ApplyConfiguration(new ResidentConfiguration());
             modelBuilder.ApplyConfiguration(new RoomResidentConfiguration());
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
         }
     }
 }
