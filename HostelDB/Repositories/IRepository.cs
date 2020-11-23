@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HostelDB.Repositories
 {
-    interface IRepository<T> : IDisposable
+    interface IRepository<T>
         where T : class
     {
         IEnumerable<T> GetObjectList();
