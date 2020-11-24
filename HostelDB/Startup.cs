@@ -31,8 +31,8 @@ namespace HostelDB
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "ToDo API",
-                    Description = "A simple example ASP.NET Core Web API"
+                    Title = "Hostel.DAL",
+                    Description = "Data processing layer."
                 });
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -50,7 +50,7 @@ namespace HostelDB
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hostel.DAL");
                 c.RoutePrefix = string.Empty;
             });
 
