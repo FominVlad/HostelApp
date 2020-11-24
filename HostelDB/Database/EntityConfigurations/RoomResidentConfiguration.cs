@@ -1,10 +1,6 @@
 ﻿using HostelDB.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HostelDB.Database.EntityConfigurations
 {
@@ -24,9 +20,9 @@ namespace HostelDB.Database.EntityConfigurations
                 .HasForeignKey(rr => rr.ResidentId)
                 .HasConstraintName("FK_RoomResidents_ResidentId_Residents_Id");
 
-            builder.HasIndex(rr => rr.Id).HasName("I_RoomResidents_Id");
-            builder.HasIndex(rr => rr.SettleDate).HasName("I_RoomResidents_SettleDate");
-            builder.HasIndex(rr => rr.EvictDate).HasName("I_RoomResidents_EvictDate");
+            builder.HasIndex(rr => rr.Id).HasDatabaseName("I_RoomResidents_Id");
+            builder.HasIndex(rr => rr.SettleDate).HasDatabaseName("I_RoomResidents_SettleDate");
+            builder.HasIndex(rr => rr.EvictDate).HasDatabaseName("I_RoomResidents_EvictDate");
 
             builder.Property(rr => rr.RoomId).IsRequired()
                 .HasComment("Room unique identifier.");

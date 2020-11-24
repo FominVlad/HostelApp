@@ -1,10 +1,6 @@
 ﻿using HostelDB.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HostelDB.Database.EntityConfigurations
 {
@@ -15,8 +11,7 @@ namespace HostelDB.Database.EntityConfigurations
             builder.HasKey(r => r.Id).HasName("PK_Rooms_Id");
             builder.HasAlternateKey(r => new { r.Floor, r.Number });
 
-            builder.HasIndex(r => r.Id)
-                .HasName("I_Rooms_Id");
+            builder.HasIndex(r => r.Id).HasDatabaseName("I_Rooms_Id");
 
             builder.Property(r => r.Floor).IsRequired()
                 .HasComment("Floor number.");
