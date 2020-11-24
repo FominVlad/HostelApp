@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostelDB", "HostelDB\HostelDB.csproj", "{69CD05E5-31E6-43E5-AC05-4485561EB339}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel.DAL", "HostelDB\Hostel.DAL.csproj", "{69CD05E5-31E6-43E5-AC05-4485561EB339}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
