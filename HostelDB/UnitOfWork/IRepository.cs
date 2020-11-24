@@ -13,6 +13,5 @@ namespace HostelDB.Repositories
         void Create(T item);
         void Update(T item);
         void Delete(int id);
-        void Save();
     }
 }

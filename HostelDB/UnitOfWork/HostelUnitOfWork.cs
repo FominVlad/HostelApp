@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HostelDB.Repositories
 {
-    public class UnitOfWork : IDisposable
+    public class HostelUnitOfWork : IDisposable
     {
         private HostelDbContext DbContext { get; set; }
         private RoomRepository RoomRepository { get; set; }
@@ -16,7 +16,7 @@ namespace HostelDB.Repositories
         private RoomResidentRepository RoomResidentRepository { get; set; }
         private bool Disposed { get; set; }
 
-        public UnitOfWork()
+        public HostelUnitOfWork()
         {
             this.DbContext = new HostelDbContext();
             Disposed = false;
@@ -61,6 +61,11 @@ namespace HostelDB.Repositories
             }
 
             this.Disposed = true;
+        }
+
+        public void Save()
+        {
+            DbContext.SaveChanges();
         }
     }
 }

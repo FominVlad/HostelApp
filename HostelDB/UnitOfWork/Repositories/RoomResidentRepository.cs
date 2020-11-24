@@ -1,5 +1,6 @@
 ﻿using HostelDB.Database;
 using HostelDB.Database.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,32 +17,29 @@ namespace HostelDB.Repositories
         }
         public void Create(RoomResident item)
         {
-            throw new NotImplementedException();
+            DbContext.RoomResidents.Add(item);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            RoomResident roomResident = DbContext.RoomResidents.Find(id);
+            if (roomResident != null)
+                DbContext.Remove(roomResident);
         }
 
         public RoomResident GetObject(int id)
         {
-            throw new NotImplementedException();
+            return DbContext.RoomResidents.Find(id);
         }
 
         public IEnumerable<RoomResident> GetObjectList()
         {
-            throw new NotImplementedException();
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
+            return DbContext.RoomResidents.AsEnumerable();
         }
 
         public void Update(RoomResident item)
         {
-            throw new NotImplementedException();
+            DbContext.Entry(item).State = EntityState.Modified;
         }
     }
 }
