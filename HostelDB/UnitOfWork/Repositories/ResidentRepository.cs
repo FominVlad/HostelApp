@@ -13,16 +13,21 @@ namespace HostelDB.Repositories
         {
             this.DbContext = dbContext;
         }
-        public void Create(Resident item)
+        public Resident Create(Resident item)
         {
             DbContext.Residents.Add(item);
+            return item;
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             Resident resident = DbContext.Residents.Find(id);
             if (resident != null)
+            {
                 DbContext.Residents.Remove(resident);
+                return true;
+            }
+            return false;
         }
 
         public Resident GetObject(int id)
@@ -35,9 +40,14 @@ namespace HostelDB.Repositories
             return DbContext.Residents.AsEnumerable();
         }
 
-        public void Update(Resident item)
+        public bool Update(Resident item)
         {
+            Resident residentToUpdate = DbContext.Residents.Find(item.Id);
+            if (residentToUpdate == null)
+                return false;
+
             DbContext.Entry(item).State = EntityState.Modified;
+            return true;
         }
     }
 }

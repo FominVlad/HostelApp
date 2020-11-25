@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Hostel.WEB.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +20,8 @@ namespace Hostel.WEB
         {
             services.AddSwaggerGen();
             services.AddControllers();
+
+            services.AddHostelUnitOfWork();
 
             services.AddSwaggerGen(c =>
             {

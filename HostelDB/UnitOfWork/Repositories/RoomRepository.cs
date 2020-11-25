@@ -13,20 +13,30 @@ namespace HostelDB.Repositories
         {
             this.DbContext = dbContext;
         }
-        public void Create(Room item)
+        public Room Create(Room item)
         {
             DbContext.Rooms.Add(item);
+            return item;
         }
-        public void Update(Room item)
+        public bool Update(Room item)
         {
+            Room roomToUpdate = DbContext.Rooms.Find(item.Id);
+            if (roomToUpdate == null)
+                return false;
+
             DbContext.Entry(item).State = EntityState.Modified;
+            return true;
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             Room room = DbContext.Rooms.Find(id);
             if (room != null)
+            {
                 DbContext.Remove(room);
+                return true;
+            }
+            return false;
         }
 
         public Room GetObject(int id)

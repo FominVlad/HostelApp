@@ -24,7 +24,6 @@ namespace HostelDB
             //    options.UseSqlServer(Configuration.GetConnectionString("MSSQL")));
 
             services.AddControllers();
-            services.AddHostelUnitOfWork();
 
             services.AddSwaggerGen(c =>
             {

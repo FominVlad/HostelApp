@@ -6,9 +6,6 @@ namespace HostelDB.Database
 {
     public class HostelDbContext : DbContext
     {
-        //public HostelDbContext(DbContextOptions<HostelDbContext> options) : 
-        //    base(options) { }
-
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Resident> Residents { get; set; }
         public DbSet<RoomResident> RoomResidents { get; set; }
