@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel.DAL", "HostelDB\Hostel.DAL.csproj", "{69CD05E5-31E6-43E5-AC05-4485561EB339}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hostel.WEB", "Hostel.WEB\Hostel.WEB.csproj", "{2A851C01-0DCD-4BD4-B36C-D78888071DCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel.WEB", "Hostel.WEB\Hostel.WEB.csproj", "{2A851C01-0DCD-4BD4-B36C-D78888071DCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hostel.gRPCService", "Hostel.gRPCService\Hostel.gRPCService.csproj", "{FF7ED288-A009-4694-B4EA-03783E7CE4E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hostel.BookingClient", "Hostel.BookingClient\Hostel.BookingClient.csproj", "{8B544457-F13C-4F4B-9274-2D44577479A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{2A851C01-0DCD-4BD4-B36C-D78888071DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A851C01-0DCD-4BD4-B36C-D78888071DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A851C01-0DCD-4BD4-B36C-D78888071DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF7ED288-A009-4694-B4EA-03783E7CE4E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF7ED288-A009-4694-B4EA-03783E7CE4E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF7ED288-A009-4694-B4EA-03783E7CE4E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF7ED288-A009-4694-B4EA-03783E7CE4E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B544457-F13C-4F4B-9274-2D44577479A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B544457-F13C-4F4B-9274-2D44577479A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B544457-F13C-4F4B-9274-2D44577479A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B544457-F13C-4F4B-9274-2D44577479A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
