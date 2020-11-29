@@ -1,8 +1,48 @@
-﻿@{
+﻿@model IEnumerable<Room>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
+
     <h1 class="display-4">Welcome</h1>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Floor</th>
+            <th>Number</th>
+            <th>Max residents count</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Floor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxResidentsCount)
+                </td>
+                @*<td>
+                    @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                </td>*@
+            </tr>
+        }
+    </table>
+
+
+    @*<form method="post" action="/Home/Index">
+            <input type="text" name="message" />
+            <input type="submit" value="Отправить" />
+        </form>*@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
