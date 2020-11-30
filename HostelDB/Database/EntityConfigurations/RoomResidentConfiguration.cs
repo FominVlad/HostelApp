@@ -22,7 +22,6 @@ namespace HostelDB.Database.EntityConfigurations
 
             builder.HasIndex(rr => rr.Id).HasDatabaseName("I_RoomResidents_Id");
             builder.HasIndex(rr => rr.SettleDate).HasDatabaseName("I_RoomResidents_SettleDate");
-            builder.HasIndex(rr => rr.EvictDate).HasDatabaseName("I_RoomResidents_EvictDate");
 
             builder.Property(rr => rr.RoomId).IsRequired()
                 .HasComment("Room unique identifier.");
@@ -30,8 +29,7 @@ namespace HostelDB.Database.EntityConfigurations
                 .HasComment("Resident unique identifier.");
             builder.Property(rr => rr.SettleDate).IsRequired()
                 .HasComment("Resident's settle date.");
-            builder.Property(rr => rr.EvictDate).IsRequired()
-                .HasComment("Resident's evicting date.");
+            builder.Property(rr => rr.EvictDate).HasComment("Resident's evicting date.");
             builder.Property(rr => rr.Id)
                 .HasComment("Room and resident connection unique identifier.");
         }
