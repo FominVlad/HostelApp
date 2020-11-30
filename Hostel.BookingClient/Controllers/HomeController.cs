@@ -26,8 +26,8 @@ namespace Hostel.BookingClient.Controllers
         public IActionResult Index()
         {
             IndexModel.Rooms = ClientGRPC.RoomClient.GetRooms(new RoomRequest()).Rooms.ToList();
-            IndexModel.Residents = new List<Resident>();//ClientGRPC.ResidentClient.GetResidents(new ResidentRequest()).Residents.ToList();
-            IndexModel.RoomResidents = new List<RoomResident>();//ClientGRPC.RoomResidentClient.GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
+            IndexModel.Residents = ClientGRPC.ResidentClient.GetResidents(new ResidentRequest()).Residents.ToList();
+            IndexModel.RoomResidents = ClientGRPC.RoomResidentClient.GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
 
             return View(IndexModel);
         }

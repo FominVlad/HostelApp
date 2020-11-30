@@ -32,6 +32,8 @@ namespace Hostel.gRPCService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<RoomService>();
+                endpoints.MapGrpcService<ResidentService>();
+                endpoints.MapGrpcService<RoomResidentService>();
 
                 endpoints.MapGet("/", async context =>
                 {
