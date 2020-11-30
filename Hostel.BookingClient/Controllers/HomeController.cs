@@ -14,21 +14,22 @@ namespace Hostel.BookingClient.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private ClientGRPC ClientGRPC { get; set; }
+        private IndexModel IndexModel { get; set; }
 
         public HomeController(ILogger<HomeController> logger, ClientGRPC clientGRPC)
         {
             _logger = logger;
             this.ClientGRPC = clientGRPC;
+            IndexModel = new IndexModel();
         }
 
         public IActionResult Index()
         {
-            List<Models.Room> rooms = new List<Models.Room>();
-            foreach (gRPCService.Room room in ClientGRPC.Client.GetRooms(new RoomRequest()).Rooms)
-            {
-                rooms.Add(new Models.Room() { Id = room.Id, MaxResidentsCount = room.MaxResidentsCount, Floor = room.Floor, Number = room.Number });
-            }
-            return View(rooms);
+            IndexModel.Rooms = ClientGRPC.RoomClient.GetRooms(new RoomRequest()).Rooms.ToList();
+            IndexModel.Residents = new List<Resident>();//ClientGRPC.ResidentClient.GetResidents(new ResidentRequest()).Residents.ToList();
+            IndexModel.RoomResidents = new List<RoomResident>();//ClientGRPC.RoomResidentClient.GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
+
+            return View(IndexModel);
         }
 
         public IActionResult Privacy()
