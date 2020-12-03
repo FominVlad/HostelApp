@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Hostel.gRPCService";
+
+package resident;
+
+service ResidentProvider {
+  rpc GetResidents (ResidentRequest) returns (ResidentReply);
+}
+ 
+message ResidentRequest {
+}
+ 
+message ResidentReply {
+  repeated Resident residents = 1;
+}
+
+message Resident {
+  int32 id = 1;
+  string surname = 2;
+  string name = 3;
+  string patronymic = 4;
+  string birthday = 5;
+}

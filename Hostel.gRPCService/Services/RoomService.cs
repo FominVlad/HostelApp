@@ -30,8 +30,6 @@ namespace Hostel.gRPCService.Services
                 });
             }
             
-
-            var a = UnitOfWork.Rooms.GetObjectList().ToArray();
             return Task.FromResult(roomReply);
         }
     }
