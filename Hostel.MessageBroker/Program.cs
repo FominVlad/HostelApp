@@ -19,7 +19,7 @@ namespace Hostel.MessageBroker
             //FanoutExchangePublisher.Publish(channel);
 
             HttpListener listener = new HttpListener();
-            listener.Prefixes.Add("http://localhost:7777/");
+            listener.Prefixes.Add("http://localhost:7771/");
             listener.Start();
             Console.WriteLine("Ожидание подключений...");
 
@@ -27,10 +27,15 @@ namespace Hostel.MessageBroker
             {
                 HttpListenerContext context = listener.GetContext();/*await listener.GetContextAsync();*/
                 HttpListenerRequest request = context.Request;
-                var a = context.Request.Headers.GetValues("json").GetValue(0);
+                string json = context.Request.Headers.GetValues("json")?.GetValue(0)?.ToString() ?? null;
+
+                if(!string.IsNullOrEmpty(json))
+                FanoutExchangePublisher.Publish(channel, json);
                 HttpListenerResponse response = context.Response;
 
-                string responseString = "<html><head><meta charset='utf8'></head><body>Привет мир!</body></html>";
+                response.StatusCode = 200;
+
+                string responseString = string.Empty;
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
                 response.ContentLength64 = buffer.Length;
                 Stream output = response.OutputStream;
