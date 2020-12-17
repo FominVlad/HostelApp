@@ -25,7 +25,7 @@ namespace Hostel.MessageBroker
 
             while (true)
             {
-                HttpListenerContext context = listener.GetContext();/*await listener.GetContextAsync();*/
+                HttpListenerContext context = listener.GetContext();
                 HttpListenerRequest request = context.Request;
                 string json = context.Request.Headers.GetValues("json")?.GetValue(0)?.ToString() ?? null;
 

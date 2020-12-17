@@ -4,9 +4,6 @@
 }
 
 <div class="text-center">
-
-    <h1 class="display-4">Welcome</h1>
-
     <table>
         <tr>
             <th>Id</th>
@@ -15,30 +12,22 @@
             <th>Max residents count</th>
             <th></th>
         </tr>
-
-        @*@foreach (var item in Model)*@
+        @foreach (var room in Model.Rooms)
         {
-            @foreach (var room in Model.Rooms)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => room.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => room.Floor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => room.Number)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => room.MaxResidentsCount)
-                    </td>
-                    @*<td>
-                        @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
-                    </td>*@
-                </tr>
-            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => room.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.Floor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.MaxResidentsCount)
+                </td>
+            </tr>
         }
     </table>
 
@@ -51,33 +40,25 @@
             <th>Birthday</th>
             <th></th>
         </tr>
-
-        @*@foreach (var item in Model)*@
+        @foreach (var resident in Model.Residents)
         {
-            @foreach (var resident in Model.Residents)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => resident.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => resident.Surname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => resident.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => resident.Patronymic)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => resident.Birthday)
-                    </td>
-                    @*<td>
-                        @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
-                    </td>*@
-                </tr>
-            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => resident.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => resident.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => resident.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => resident.Patronymic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => resident.Birthday)
+                </td>
+            </tr>
         }
     </table>
 
@@ -89,40 +70,35 @@
             <th>Max residents count</th>
             <th></th>
         </tr>
-
-        @*@foreach (var item in Model)*@
+        @foreach (var roomResident in Model.RoomResidents)
         {
-            @foreach (var roomResident in Model.RoomResidents)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => roomResident.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => roomResident.RoomId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => roomResident.ResidentId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => roomResident.SettleDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => roomResident.EvictDate)
-                    </td>
-                    @*<td>
-                        @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
-                    </td>*@
-                </tr>
-            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => roomResident.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => roomResident.RoomId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => roomResident.ResidentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => roomResident.SettleDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => roomResident.EvictDate)
+                </td>
+            </tr>
         }
     </table>
 
-
-    @*<form method="post" action="/Home/Index">
-            <input type="text" name="message" />
-            <input type="submit" value="Отправить" />
-        </form>*@
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <form method="post" action="/Home/Index">
+        <input type="number" name="roomId" />
+        <input type="number" name="residentId" />
+        <input type="text" name="surname" />
+        <input type="text" name="name" />
+        <input type="text" name="patronymic" />
+        <input type="text" name="birthday" />
+        <input type="submit" value="Отправить" />
+    </form>
 </div>

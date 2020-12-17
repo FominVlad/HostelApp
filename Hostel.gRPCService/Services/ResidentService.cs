@@ -15,13 +15,13 @@ namespace Hostel.gRPCService.Services
             this.UnitOfWork = unitOfWork;
         }
 
-        public override Task<ResidentReply> GetResidents(ResidentRequest request, ServerCallContext context)
+        public override Task<ResidentGetReply> GetResidents(ResidentGetRequest request, ServerCallContext context)
         {
-            ResidentReply residentReply = new ResidentReply();
+            ResidentGetReply residentReply = new ResidentGetReply();
 
             foreach (HostelDB.Database.Models.Resident resident in UnitOfWork.Residents.GetObjectList())
             {
-                residentReply.Residents.Add(new Resident()
+                residentReply.Residents.Add(new ResidentGet()
                 {
                     Id = resident.Id,
                     Surname = resident.Surname,

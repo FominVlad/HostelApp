@@ -1,8 +1,12 @@
-﻿using RabbitMQ.Client;
+﻿using Hostel.gRPCService;
+using Hostel.gRPCService.Models;
+using HostelDB.Repositories;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace RabbitMQ.Consumer
 {
@@ -26,6 +30,42 @@ namespace RabbitMQ.Consumer
                 var body = e.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine(message);
+
+                RabbitMQJsonModel jsonObj = JsonSerializer.Deserialize<RabbitMQJsonModel>(message);
+
+                HostelUnitOfWork unitOfWork = new HostelUnitOfWork();
+                switch (jsonObj.Method)
+                {
+                    case "CreateRoomResident":
+                        {
+                            CreateRoomResidentRequest request = JsonSerializer.Deserialize<CreateRoomResidentRequest>(jsonObj.ObjectJSON);
+
+                            unitOfWork.RoomResidents.Create(new HostelDB.Database.Models.RoomResident() 
+                            { 
+                                RoomId = request.RoomId,
+                                ResidentId = request.ResidentId,
+                                SettleDate = DateTime.Now,
+                                EvictDate = DateTime.Now
+                            });
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
+
+                unitOfWork.Save();
+
+
+
+
+                
+
+                
+
+
+
             };
 
             channel.BasicConsume("demo-fanout-queue", true, consumer);

@@ -26,7 +26,7 @@ namespace Hostel.BookingClient.Controllers
         public IActionResult Index()
         {
             IndexModel.Rooms = ClientGRPC.RoomClient.GetRooms(new RoomRequest()).Rooms.ToList();
-            IndexModel.Residents = ClientGRPC.ResidentClient.GetResidents(new ResidentRequest()).Residents.ToList();
+            IndexModel.Residents = ClientGRPC.ResidentClient.GetResidents(new ResidentGetRequest()).Residents.ToList();
             IndexModel.RoomResidents = ClientGRPC.RoomResidentClient.GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
 
             return View(IndexModel);
@@ -37,23 +37,29 @@ namespace Hostel.BookingClient.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //async public Task<IActionResult> Index(string message)
-        //{
-        //    Test.RequestMessage = message;
-
-        //    //var reply = await Test.ClientGRPC.Client.SayHelloAsync(new HelloRequest { Name = message });
-
-        //    //Test.ReplyMessage = reply.Message;
-
-        //    return View(Test);
-        //}
-
-        [HttpGet]
-        public IActionResult Aasd(string message)
+        [HttpPost]
+        public IActionResult Index(int roomId, int residentId, ResidentCreateRequest residentCreate)
         {
-            return View();
+
+            if (residentId != 0 && !string.IsNullOrEmpty(residentCreate.Surname) && !string.IsNullOrEmpty(residentCreate.Name))
+            {
+                ClientGRPC.RoomResidentClient.CreateRoomResident(new CreateRoomResidentRequest() 
+                {
+                    RoomId = roomId,
+                    ResidentId = residentId
+                    
+                });
+                //ClientGRPC.ResidentClient.CreateResident(residentCreate);
+            }
+
+            return Index();
         }
+
+        //[HttpGet]
+        //public IActionResult Aasd(string message)
+        //{
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

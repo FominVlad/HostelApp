@@ -9,4 +9,9 @@
     <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hostel.gRPCService\Hostel.gRPCService.csproj" />
+    <ProjectReference Include="..\HostelDB\Hostel.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

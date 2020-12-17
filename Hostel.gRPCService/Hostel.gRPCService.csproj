@@ -10,6 +10,7 @@
     <PackageReference Include="Grpc.AspNetCore" Version="2.33.1" />
     <PackageReference Include="Grpc.Core" Version="2.34.0-pre1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="RestSharp" Version="106.11.8-alpha.0.11" />
   </ItemGroup>
 
   <ItemGroup>

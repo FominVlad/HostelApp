@@ -6,13 +6,35 @@ package roomresident;
 
 service RoomResidentProvider {
   rpc GetRoomResidents (RoomResidentRequest) returns (RoomResidentReply);
+  rpc CreateRoomResident (CreateRoomResidentRequest) returns (CreateRoomResidentReply);
+  rpc CreateRoomCreateResident (CreateRoomCreateResidentRequest) returns (CreateRoomCreateResidentReply);
 }
  
 message RoomResidentRequest {
 }
- 
+
+message CreateRoomResidentRequest {
+  int32 roomId = 1;
+  int32 residentId = 2;
+}
+
+message CreateRoomCreateResidentRequest {
+  int32 roomId = 1;
+  int32 residentId = 2;
+  string surname = 3;
+  string name = 4;
+  string patronymic = 5;
+  string birthday = 6;
+}
+
 message RoomResidentReply {
   repeated RoomResident roomResidents = 1;
+}
+
+message CreateRoomResidentReply {
+}
+
+message CreateRoomCreateResidentReply {
 }
 
 message RoomResident {
