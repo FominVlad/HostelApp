@@ -16,6 +16,7 @@ namespace HostelDB.Repositories
         public RoomResident Create(RoomResident item)
         {
             DbContext.RoomResidents.Add(item);
+            DbContext.SaveChanges();
             return item;
         }
 

@@ -1,6 +1,7 @@
 ﻿using RabbitMQ.Client;
 using RabbitMQ.Consumer;
 using System;
+using System.Collections.Generic;
 
 namespace Hostel.MessageListener
 {
@@ -8,13 +9,44 @@ namespace Hostel.MessageListener
     {
         static void Main(string[] args)
         {
-            var factory = new ConnectionFactory
+            var factoryConsumer = new ConnectionFactory
             {
                 Uri = new Uri("amqp://guest:guest@localhost:5672")
             };
-            using var connection = factory.CreateConnection();
-            using var channel = connection.CreateModel();
-            FanoutExchangeConsumer.Consume(channel);
+            using var connectionConsumer = factoryConsumer.CreateConnection();
+            using var channelConsumer = connectionConsumer.CreateModel();
+            //channelConsumer.ExchangeDeclare("demo-fanout-exchange", ExchangeType.Fanout);
+            //channelConsumer.QueueDeclare("demo-fanout-queue",
+            //    durable: true,
+            //    exclusive: false,
+            //    autoDelete: false,
+            //    arguments: null);
+            //channelConsumer.QueueBind("demo-fanout-queue", "demo-fanout-exchange", string.Empty);
+            //channelConsumer.BasicQos(0, 10, false);
+
+            channelConsumer.ExchangeDeclare("demo-direct-exchange", ExchangeType.Direct);
+            channelConsumer.QueueDeclare("demo-direct-queue",
+                durable: true,
+                exclusive: false,
+                autoDelete: false,
+                arguments: null);
+            channelConsumer.QueueBind("demo-direct-queue", "demo-direct-exchange", "account.init");
+            channelConsumer.BasicQos(0, 10, false);
+
+            var factoryProducer = new ConnectionFactory
+            {
+                Uri = new Uri("amqp://guest:guest@localhost:5672")
+            };
+            using var connectionProducer = factoryProducer.CreateConnection();
+            using var channelProducer = connectionProducer.CreateModel();
+
+            var ttl = new Dictionary<string, object>
+            {
+                {"x-message-ttl", 30000 }
+            };
+            channelProducer.ExchangeDeclare("demo-direct-exchange2", ExchangeType.Direct, arguments: ttl);
+
+            FanoutExchangeConsumer.Consume(channelConsumer, channelProducer);
         }
     }
 }
