@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Hostel.BookingClient.Models;
 using Hostel.gRPCService;
+using Hostel.BookingClient.Models.DTOs;
 
 namespace Hostel.BookingClient.Controllers
 {
@@ -38,21 +39,39 @@ namespace Hostel.BookingClient.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(int roomId, int residentId, ResidentCreateRequest residentCreate)
+        public IActionResult Index(int roomId, int residentId, ResidentCreateRequestDTO residentCreateDTO)
         {
+            IndexModel.Rooms = ClientGRPC.RoomClient.GetRooms(new RoomRequest()).Rooms.ToList();
+            IndexModel.Residents = ClientGRPC.ResidentClient.GetResidents(new ResidentGetRequest()).Residents.ToList();
+            IndexModel.RoomResidents = ClientGRPC.RoomResidentClient.GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
 
-            if (residentId != 0 && !string.IsNullOrEmpty(residentCreate.Surname) && !string.IsNullOrEmpty(residentCreate.Name))
+            if (residentId != 0)
             {
-                ClientGRPC.RoomResidentClient.CreateRoomResident(new CreateRoomResidentRequest() 
+                var result = ClientGRPC.RoomResidentClient.CreateRoomResident(new CreateRoomResidentRequest() 
                 {
                     RoomId = roomId,
                     ResidentId = residentId
-                    
                 });
-                //ClientGRPC.ResidentClient.CreateResident(residentCreate);
+
+                IndexModel.RoomResidents.Add(new RoomResident() { Id = result.Id, RoomId = roomId, ResidentId = residentId, EvictDate = DateTime.Now.ToShortTimeString(), SettleDate = DateTime.Now.ToShortTimeString() });
+            }
+            else
+            {
+                var result = ClientGRPC.RoomResidentClient.CreateRoomCreateResident(new CreateRoomCreateResidentRequest()
+                {
+                    RoomId = roomId,
+                    ResidentId = residentId,
+                    Surname = residentCreateDTO.Surname,
+                    Name = residentCreateDTO.Name,
+                    Patronymic = residentCreateDTO.Patronymic,
+                    Birthday = residentCreateDTO.Birthday
+                });
+
+                IndexModel.Residents.Add(new ResidentGet() { Id = result.ResidentId, Birthday = residentCreateDTO.Birthday, Surname = residentCreateDTO.Surname, Name = residentCreateDTO.Name, Patronymic = residentCreateDTO.Patronymic } );
+                IndexModel.RoomResidents.Add(new RoomResident() { Id = result.Id, RoomId = roomId, ResidentId = result.ResidentId, EvictDate = DateTime.Now.ToShortTimeString(), SettleDate = DateTime.Now.ToShortTimeString() });
             }
 
-            return Index();
+            return View(IndexModel);
         }
 
         //[HttpGet]
