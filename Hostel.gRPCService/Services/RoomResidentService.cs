@@ -66,5 +66,20 @@ namespace Hostel.gRPCService.Services
 
             return Task.FromResult(createRoomCreateResidentReply);
         }
+
+        public override Task<DeleteRoomResidentReply> DeleteRoomResident(DeleteRoomResidentRequest createRoomResident, ServerCallContext context)
+        {
+            var client = new RestClient("http://localhost:7771/");
+            // client.Authenticator = new HttpBasicAuthenticator(username, password);
+            var httpRequest = new RestRequest("");
+            string roomResidentJSON = JsonSerializer.Serialize<DeleteRoomResidentRequest>(createRoomResident);
+            string requestJSON = JsonSerializer.Serialize<RabbitMQJsonModel>(new RabbitMQJsonModel() { Method = "DeleteRoomResident", ObjectJSON = roomResidentJSON });
+            httpRequest.AddHeader("json", requestJSON);
+            var response = client.Post(httpRequest);
+
+            DeleteRoomResidentReply deleteRoomResidentReply = JsonSerializer.Deserialize<DeleteRoomResidentReply>(response.Content);
+
+            return Task.FromResult(deleteRoomResidentReply);
+        }
     }
 }

@@ -82,6 +82,23 @@ namespace RabbitMQ.Consumer
 
                             break;
                         }
+                    case "DeleteRoomResident":
+                        {
+                            DeleteRoomResidentRequest request = JsonSerializer.Deserialize<DeleteRoomResidentRequest>(jsonObj.ObjectJSON);
+
+                            bool result = unitOfWork.RoomResidents.Delete(request.Id);
+
+                            DeleteRoomResidentReply reply = new DeleteRoomResidentReply()
+                            {
+                                Result = result
+                            };
+
+                            string requestJSON = JsonSerializer.Serialize<DeleteRoomResidentReply>(reply);
+
+                            FanoutExchangePublisher.Publish(channelProducer, requestJSON);
+
+                            break;
+                        }
                     default:
                         {
                             break;

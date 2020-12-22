@@ -1,0 +1,99 @@
+﻿@model IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Floor</th>
+            <th>Number</th>
+            <th>Max residents count</th>
+            <th></th>
+        </tr>
+        @foreach (var room in Model.Rooms)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => room.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.Floor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.MaxResidentsCount)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Surname</th>
+            <th>Name</th>
+            <th>Patronymic</th>
+            <th>Birthday</th>
+            <th></th>
+        </tr>
+        @foreach (var resident in Model.Residents)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => resident.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => resident.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => resident.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => resident.Patronymic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => resident.Birthday)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>RoomId</th>
+            <th>ResidentId</th>
+            <th>SettleDate</th>
+            <th>EvictDate</th>
+        </tr>
+        @foreach (var roomResident in Model.RoomResidents)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => roomResident.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => roomResident.RoomId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => roomResident.ResidentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => roomResident.SettleDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => roomResident.EvictDate)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <form method="post" action="/Home/Index">
+        <input type="number" name="id" />
+        <input type="submit" value="Отправить" />
+    </form>
+</div>

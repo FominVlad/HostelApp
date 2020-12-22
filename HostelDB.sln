@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel.gRPCService", "Hoste
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel.BookingClient", "Hostel.BookingClient\Hostel.BookingClient.csproj", "{8B544457-F13C-4F4B-9274-2D44577479A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hostel.MessageListener", "Hostel.MessageListener\Hostel.MessageListener.csproj", "{D27FAB0A-C4B3-4B4C-A028-6E306AAC0693}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel.MessageListener", "Hostel.MessageListener\Hostel.MessageListener.csproj", "{D27FAB0A-C4B3-4B4C-A028-6E306AAC0693}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hostel.MessageBroker", "Hostel.MessageBroker\Hostel.MessageBroker.csproj", "{1940B822-3CDE-4688-AEC2-9D0E780EB0B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel.MessageBroker", "Hostel.MessageBroker\Hostel.MessageBroker.csproj", "{1940B822-3CDE-4688-AEC2-9D0E780EB0B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hostel.EvictingClient", "Hostel.EvictingClient\Hostel.EvictingClient.csproj", "{CE3045A2-5A6F-4E31-8819-D181DCD995E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{1940B822-3CDE-4688-AEC2-9D0E780EB0B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1940B822-3CDE-4688-AEC2-9D0E780EB0B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1940B822-3CDE-4688-AEC2-9D0E780EB0B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE3045A2-5A6F-4E31-8819-D181DCD995E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE3045A2-5A6F-4E31-8819-D181DCD995E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE3045A2-5A6F-4E31-8819-D181DCD995E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE3045A2-5A6F-4E31-8819-D181DCD995E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
