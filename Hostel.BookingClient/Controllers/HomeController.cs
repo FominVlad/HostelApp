@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Hostel.BookingClient.Models;
@@ -53,7 +51,7 @@ namespace Hostel.BookingClient.Controllers
                     ResidentId = residentId
                 });
 
-                IndexModel.RoomResidents.Add(new RoomResident() { Id = result.Id, RoomId = roomId, ResidentId = residentId, EvictDate = DateTime.Now.ToShortTimeString(), SettleDate = DateTime.Now.ToShortTimeString() });
+                IndexModel.RoomResidents.Add(new RoomResident() { Id = result.Id, RoomId = roomId, ResidentId = residentId, EvictDate = DateTime.Now.ToString(), SettleDate = DateTime.Now.ToString() });
             }
             else
             {
@@ -68,17 +66,11 @@ namespace Hostel.BookingClient.Controllers
                 });
 
                 IndexModel.Residents.Add(new ResidentGet() { Id = result.ResidentId, Birthday = residentCreateDTO.Birthday, Surname = residentCreateDTO.Surname, Name = residentCreateDTO.Name, Patronymic = residentCreateDTO.Patronymic } );
-                IndexModel.RoomResidents.Add(new RoomResident() { Id = result.Id, RoomId = roomId, ResidentId = result.ResidentId, EvictDate = DateTime.Now.ToShortTimeString(), SettleDate = DateTime.Now.ToShortTimeString() });
+                IndexModel.RoomResidents.Add(new RoomResident() { Id = result.Id, RoomId = roomId, ResidentId = result.ResidentId, EvictDate = DateTime.Now.ToString(), SettleDate = DateTime.Now.ToString() });
             }
 
             return View(IndexModel);
         }
-
-        //[HttpGet]
-        //public IActionResult Aasd(string message)
-        //{
-        //    return View();
-        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
