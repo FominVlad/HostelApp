@@ -24,9 +24,12 @@ namespace Hostel.BookingClient.Controllers
 
         public IActionResult Index()
         {
-            IndexModel.Rooms = ClientGRPC.RoomClient.GetRooms(new RoomRequest()).Rooms.ToList();
-            IndexModel.Residents = ClientGRPC.ResidentClient.GetResidents(new ResidentGetRequest()).Residents.ToList();
-            IndexModel.RoomResidents = ClientGRPC.RoomResidentClient.GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
+            IndexModel.Rooms = ClientGRPC.RoomClient
+                               .GetRooms(new RoomRequest()).Rooms.ToList();
+            IndexModel.Residents = ClientGRPC.ResidentClient
+                                .GetResidents(new ResidentGetRequest()).Residents.ToList();
+            IndexModel.RoomResidents = ClientGRPC.RoomResidentClient
+                                .GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
 
             return View(IndexModel);
         }
@@ -39,9 +42,12 @@ namespace Hostel.BookingClient.Controllers
         [HttpPost]
         public IActionResult Index(int roomId, int residentId, ResidentCreateRequestDTO residentCreateDTO)
         {
-            IndexModel.Rooms = ClientGRPC.RoomClient.GetRooms(new RoomRequest()).Rooms.ToList();
-            IndexModel.Residents = ClientGRPC.ResidentClient.GetResidents(new ResidentGetRequest()).Residents.ToList();
-            IndexModel.RoomResidents = ClientGRPC.RoomResidentClient.GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
+            IndexModel.Rooms = ClientGRPC.RoomClient
+                                 .GetRooms(new RoomRequest()).Rooms.ToList();
+            IndexModel.Residents = ClientGRPC.ResidentClient
+                                 .GetResidents(new ResidentGetRequest()).Residents.ToList();
+            IndexModel.RoomResidents = ClientGRPC.RoomResidentClient
+                                 .GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
 
             if (residentId != 0)
             {
@@ -51,7 +57,14 @@ namespace Hostel.BookingClient.Controllers
                     ResidentId = residentId
                 });
 
-                IndexModel.RoomResidents.Add(new RoomResident() { Id = result.Id, RoomId = roomId, ResidentId = residentId, EvictDate = DateTime.Now.ToString(), SettleDate = DateTime.Now.ToString() });
+                IndexModel.RoomResidents.Add(new RoomResident() 
+                { 
+                    Id = result.Id, 
+                    RoomId = roomId, 
+                    ResidentId = residentId, 
+                    EvictDate = DateTime.Now.ToString(), 
+                    SettleDate = DateTime.Now.ToString() 
+                });
             }
             else
             {
@@ -65,8 +78,23 @@ namespace Hostel.BookingClient.Controllers
                     Birthday = residentCreateDTO.Birthday
                 });
 
-                IndexModel.Residents.Add(new ResidentGet() { Id = result.ResidentId, Birthday = residentCreateDTO.Birthday, Surname = residentCreateDTO.Surname, Name = residentCreateDTO.Name, Patronymic = residentCreateDTO.Patronymic } );
-                IndexModel.RoomResidents.Add(new RoomResident() { Id = result.Id, RoomId = roomId, ResidentId = result.ResidentId, EvictDate = DateTime.Now.ToString(), SettleDate = DateTime.Now.ToString() });
+                IndexModel.Residents.Add(new ResidentGet() 
+                { 
+                    Id = result.ResidentId, 
+                    Birthday = residentCreateDTO.Birthday, 
+                    Surname = residentCreateDTO.Surname, 
+                    Name = residentCreateDTO.Name, 
+                    Patronymic = residentCreateDTO.Patronymic 
+                });
+                
+                IndexModel.RoomResidents.Add(new RoomResident() 
+                { 
+                    Id = result.Id, 
+                    RoomId = roomId, 
+                    ResidentId = result.ResidentId, 
+                    EvictDate = DateTime.Now.ToString(), 
+                    SettleDate = DateTime.Now.ToString() 
+                });
             }
 
             return View(IndexModel);
@@ -75,7 +103,10 @@ namespace Hostel.BookingClient.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel 
+            { 
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier 
+            });
         }
     }
 }

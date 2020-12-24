@@ -1,13 +1,9 @@
 ﻿using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using RabbitMQ.Consumer;
 using RabbitMQ.Producer;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hostel.MessageBroker
 {

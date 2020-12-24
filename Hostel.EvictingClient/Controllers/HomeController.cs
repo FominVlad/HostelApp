@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Hostel.EvictingClient.Models;
@@ -25,9 +22,12 @@ namespace Hostel.EvictingClient.Controllers
 
         public IActionResult Index()
         {
-            IndexModel.Rooms = ClientGRPC.RoomClient.GetRooms(new RoomRequest()).Rooms.ToList();
-            IndexModel.Residents = ClientGRPC.ResidentClient.GetResidents(new ResidentGetRequest()).Residents.ToList();
-            IndexModel.RoomResidents = ClientGRPC.RoomResidentClient.GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
+            IndexModel.Rooms = ClientGRPC.RoomClient
+                                .GetRooms(new RoomRequest()).Rooms.ToList();
+            IndexModel.Residents = ClientGRPC.ResidentClient
+                                .GetResidents(new ResidentGetRequest()).Residents.ToList();
+            IndexModel.RoomResidents = ClientGRPC.RoomResidentClient
+                                .GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
 
             return View(IndexModel);
         }
@@ -40,20 +40,25 @@ namespace Hostel.EvictingClient.Controllers
         [HttpPost]
         public IActionResult Index(int id)
         {
-            IndexModel.Rooms = ClientGRPC.RoomClient.GetRooms(new RoomRequest()).Rooms.ToList();
-            IndexModel.Residents = ClientGRPC.ResidentClient.GetResidents(new ResidentGetRequest()).Residents.ToList();
-            IndexModel.RoomResidents = ClientGRPC.RoomResidentClient.GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
+            IndexModel.Rooms = ClientGRPC.RoomClient
+                                .GetRooms(new RoomRequest()).Rooms.ToList();
+            IndexModel.Residents = ClientGRPC.ResidentClient
+                                .GetResidents(new ResidentGetRequest()).Residents.ToList();
+            IndexModel.RoomResidents = ClientGRPC.RoomResidentClient
+                                .GetRoomResidents(new RoomResidentRequest()).RoomResidents.ToList();
 
             if (id != 0)
             {
-                var result = ClientGRPC.RoomResidentClient.DeleteRoomResident(new DeleteRoomResidentRequest()
+                var result = ClientGRPC.RoomResidentClient
+                                .DeleteRoomResident(new DeleteRoomResidentRequest()
                 {
                     Id = id
                 });
 
                 if (result.Result)
                 {
-                    IndexModel.RoomResidents.Remove(IndexModel.RoomResidents.Where(rr => rr.Id == id).FirstOrDefault());
+                    IndexModel.RoomResidents
+                               .Remove(IndexModel.RoomResidents.Where(rr => rr.Id == id).FirstOrDefault());
                 }
             }
 
@@ -63,7 +68,10 @@ namespace Hostel.EvictingClient.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel 
+            { 
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier 
+            });
         }
     }
 }

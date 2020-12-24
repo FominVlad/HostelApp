@@ -6,7 +6,6 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Producer;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 

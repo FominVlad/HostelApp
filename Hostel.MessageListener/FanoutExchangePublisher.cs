@@ -1,9 +1,5 @@
-﻿using Newtonsoft.Json;
-using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
+﻿using RabbitMQ.Client;
 using System.Text;
-using System.Threading;
 
 namespace RabbitMQ.Producer
 {

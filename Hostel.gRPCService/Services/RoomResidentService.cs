@@ -2,9 +2,6 @@
 using Hostel.gRPCService.Models;
 using HostelDB.Repositories;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -43,7 +40,12 @@ namespace Hostel.gRPCService.Services
             // client.Authenticator = new HttpBasicAuthenticator(username, password);
             var httpRequest = new RestRequest("");
             string roomResidentJSON = JsonSerializer.Serialize<CreateRoomResidentRequest>(createRoomResident);
-            string requestJSON = JsonSerializer.Serialize<RabbitMQJsonModel>(new RabbitMQJsonModel() { Method = "CreateRoomResident", ObjectJSON = roomResidentJSON });
+            string requestJSON = JsonSerializer.Serialize<RabbitMQJsonModel>(new RabbitMQJsonModel() 
+            { 
+                Method = "CreateRoomResident", 
+                ObjectJSON = roomResidentJSON 
+            });
+
             httpRequest.AddHeader("json", requestJSON);
             var response = client.Post(httpRequest);
 
@@ -52,13 +54,19 @@ namespace Hostel.gRPCService.Services
             return Task.FromResult(createRoomResidentReply);
         }
 
-        public override Task<CreateRoomCreateResidentReply> CreateRoomCreateResident(CreateRoomCreateResidentRequest createRoomResident, ServerCallContext context)
+        public override Task<CreateRoomCreateResidentReply> CreateRoomCreateResident(CreateRoomCreateResidentRequest createRoomResident, 
+                ServerCallContext context)
         {
             var client = new RestClient("http://localhost:7771/");
             // client.Authenticator = new HttpBasicAuthenticator(username, password);
             var httpRequest = new RestRequest("");
             string roomResidentJSON = JsonSerializer.Serialize<CreateRoomCreateResidentRequest>(createRoomResident);
-            string requestJSON = JsonSerializer.Serialize<RabbitMQJsonModel>(new RabbitMQJsonModel() { Method = "CreateRoomCreateResidentRequest", ObjectJSON = roomResidentJSON });
+            string requestJSON = JsonSerializer.Serialize<RabbitMQJsonModel>(new RabbitMQJsonModel() 
+            { 
+                Method = "CreateRoomCreateResidentRequest", 
+                ObjectJSON = roomResidentJSON 
+            });
+
             httpRequest.AddHeader("json", requestJSON);
             var response = client.Post(httpRequest);
 
@@ -73,7 +81,12 @@ namespace Hostel.gRPCService.Services
             // client.Authenticator = new HttpBasicAuthenticator(username, password);
             var httpRequest = new RestRequest("");
             string roomResidentJSON = JsonSerializer.Serialize<DeleteRoomResidentRequest>(createRoomResident);
-            string requestJSON = JsonSerializer.Serialize<RabbitMQJsonModel>(new RabbitMQJsonModel() { Method = "DeleteRoomResident", ObjectJSON = roomResidentJSON });
+            string requestJSON = JsonSerializer.Serialize<RabbitMQJsonModel>(new RabbitMQJsonModel() 
+            { 
+                Method = "DeleteRoomResident", 
+                ObjectJSON = roomResidentJSON 
+            });
+
             httpRequest.AddHeader("json", requestJSON);
             var response = client.Post(httpRequest);
 
