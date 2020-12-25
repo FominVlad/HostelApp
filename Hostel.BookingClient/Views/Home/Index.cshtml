@@ -3,109 +3,174 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Floor</th>
-            <th>Number</th>
-            <th>Max residents count</th>
-            <th></th>
-        </tr>
-        @foreach (var room in Model.Rooms)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => room.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => room.Floor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => room.Number)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => room.MaxResidentsCount)
-                </td>
-            </tr>
-        }
-    </table>
+<div>
+    <h3>Dashboard</h3>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="room-tab" data-toggle="tab" href="#room" role="tab" aria-controls="room" aria-selected="true">Rooms</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="guest-tab" data-toggle="tab" href="#guest" role="tab" aria-controls="guest" aria-selected="false">Guests</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">Bookings</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="room" role="tabpanel" aria-labelledby="room-tab">
+            <table class="table table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>Floor</th>
+                        <th>Number</th>
+                        <th>Capacity</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var room in Model.Rooms)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => room.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => room.Floor)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => room.Number)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => room.MaxResidentsCount)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="guest" role="tabpanel" aria-labelledby="guest-tab">
+            <table class="table table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>Surname</th>
+                        <th>Name</th>
+                        <th>Patronymic</th>
+                        <th>Birthday</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var resident in Model.Residents)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => resident.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => resident.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => resident.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => resident.Patronymic)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => resident.Birthday)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="booking" role="tabpanel" aria-labelledby="booking-tab">
+            <table class="table table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>RoomId</th>
+                        <th>ResidentId</th>
+                        <th>SettleDate</th>
+                        <th>EvictDate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var roomResident in Model.RoomResidents)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => roomResident.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => roomResident.RoomId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => roomResident.ResidentId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => roomResident.SettleDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => roomResident.EvictDate)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Surname</th>
-            <th>Name</th>
-            <th>Patronymic</th>
-            <th>Birthday</th>
-            <th></th>
-        </tr>
-        @foreach (var resident in Model.Residents)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => resident.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => resident.Surname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => resident.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => resident.Patronymic)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => resident.Birthday)
-                </td>
-            </tr>
-        }
-    </table>
 
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>RoomId</th>
-            <th>ResidentId</th>
-            <th>SettleDate</th>
-            <th>EvictDate</th>
-        </tr>
-        @foreach (var roomResident in Model.RoomResidents)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => roomResident.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => roomResident.RoomId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => roomResident.ResidentId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => roomResident.SettleDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => roomResident.EvictDate)
-                </td>
-            </tr>
-        }
-    </table>
-
-    <form method="post" action="/Home/Index">
-        <h5>Room ID</h5><br>
-        <input type="number" name="roomId" />
-        <h5>Resident ID</h5><br>
-        <input type="number" name="residentId" />
-        <h5>Surname</h5><br>
-        <input type="text" name="surname" />
-        <h5>Name</h5><br>
-        <input type="text" name="name" />
-        <h5>Patronymic</h5><br>
-        <input type="text" name="patronymic" />
-        <h5>Birthday</h5><br>
-        <input type="text" name="birthday" />
-        <br>
-        <input type="submit" value="Отправить" />
-    </form>
+    <h3>Add new booking</h3>
+    <div class="row">
+        <div class="col-6">
+            <form method="post" action="/Home/Index">
+                <div class="form-group">
+                    <label for="roomId">Room ID</label><br>
+                    <input class="form-control" type="number" name="roomId" />
+                </div>
+                <div class="form-group">
+                    <ul class="nav nav-pills" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="new-tab" data-toggle="tab" href="#new" role="tab" aria-controls="new" aria-selected="true">New guest</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="existing-tab" data-toggle="tab" href="#existing" role="tab" aria-controls="existing" aria-selected="false">Existing guest</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
+                        <div class="form-group">
+                            <label for="surname">Surname</label><br>
+                            <input class="form-control" type="text" name="surname" />
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name</label><br>
+                            <input class="form-control" type="text" name="name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="patronymic">Patronymic</label><br>
+                            <input class="form-control" type="text" name="patronymic" />
+                        </div>
+                        <div class="form-group">
+                            <label for="birthday">Birthday</label><br>
+                            <input class="form-control" type="date" name="birthday" />
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="existing" role="tabpanel" aria-labelledby="existing-tab">
+                        <div class="form-group">
+                            <label for="residentId">Resident ID</label><br>
+                            <input class="form-control" type="number" name="residentId" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-info" type="submit" value="Отправить" />
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
