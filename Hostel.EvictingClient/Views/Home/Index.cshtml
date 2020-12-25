@@ -21,7 +21,7 @@
             <table class="table table-sm">
                 <thead class="thead-light">
                     <tr>
-                        <th>Id</th>
+                        <th class="pl-3">Id</th>
                         <th>Floor</th>
                         <th>Number</th>
                         <th>Capacity</th>
@@ -32,7 +32,7 @@
                     @foreach (var room in Model.Rooms)
                     {
                         <tr>
-                            <td>
+                            <td class="pl-3">
                                 @Html.DisplayFor(modelItem => room.Id)
                             </td>
                             <td>
@@ -53,7 +53,7 @@
             <table class="table table-sm">
                 <thead class="thead-light">
                     <tr>
-                        <th>Id</th>
+                        <th class="pl-3">Id</th>
                         <th>Surname</th>
                         <th>Name</th>
                         <th>Patronymic</th>
@@ -65,7 +65,7 @@
                     @foreach (var resident in Model.Residents)
                     {
                         <tr>
-                            <td>
+                            <td class="pl-3">
                                 @Html.DisplayFor(modelItem => resident.Id)
                             </td>
                             <td>
@@ -89,9 +89,9 @@
             <table class="table table-sm">
                 <thead class="thead-light">
                     <tr>
-                        <th>Id</th>
-                        <th>RoomId</th>
-                        <th>ResidentId</th>
+                        <th class="pl-3">Id</th>
+                        <th>Room</th>
+                        <th>Resident</th>
                         <th>Settle date</th>
                         <th>Evict date</th>
                         <th>Delete</th>
@@ -100,15 +100,17 @@
                 <tbody>
                     @foreach (var roomResident in Model.RoomResidents)
                     {
+                        var room = Model.Rooms.Where(r => r.Id == roomResident.RoomId).Select(r => $"Floor {r.Floor}, number {r.Number} (#{r.Id})").FirstOrDefault();
+                        var resident = Model.Residents.Where(r => r.Id == roomResident.ResidentId).Select(r => $"{r.Surname} {r.Name} {r.Patronymic} (#{r.Id})").FirstOrDefault();
                         <tr>
-                            <td>
+                            <td class="pl-3">
                                 @Html.DisplayFor(modelItem => roomResident.Id)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => roomResident.RoomId)
+                                @Html.DisplayFor(modelItem => room)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => roomResident.ResidentId)
+                                @Html.DisplayFor(modelItem => resident)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => roomResident.SettleDate)
